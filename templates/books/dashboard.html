@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>My Purchased Books</h1>
+<div class="purchases">
+    {% for purchase in purchases %}
+    <div class="purchase">
+        <h2>{{ purchase.book.title }}</h2>
+        <p>Purchased on: {{ purchase.purchased_at }}</p>
+        <a href="{% url 'download_book' purchase.book.id %}">Download PDF</a>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

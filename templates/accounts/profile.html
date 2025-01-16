@@ -1,0 +1,11 @@
+<!-- templates/accounts/profile.html -->
+
+{% extends 'accounts/base.html' %}
+
+{% block accounts %}
+<h1>User Profile</h1>
+<p>Welcome, {{ user.username }}!</p>
+<p>Email: {{ user.email }}</p>
+
+    
+{% endblock accounts %}

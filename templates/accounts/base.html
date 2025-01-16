@@ -1,0 +1,20 @@
+<!-- templates/accounts/base.html -->
+
+{% extends 'base.html' %}
+
+{% block content %}
+
+<nav>
+    <ul>
+        <li>
+            <a href="{% url 'profile' %}">Profile</a>
+        </li>
+    </ul>
+</nav>
+
+{% block accounts %}
+{% endblock accounts %}
+
+
+    
+{% endblock content %}

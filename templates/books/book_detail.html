@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="book-detail">
+    <h1>{{ book.title }}</h1>
+    {% if book.cover_image %}
+        <img src="{{ book.cover_image.url }}" alt="{{ book.title }}">
+    {% endif %}
+    <p>{{ book.description }}</p>
+    <p>Price: ${{ book.price }}</p>
+    <form action="{% url 'create_checkout_session' book.id %}" method="POST">
+        {% csrf_token %}
+        <button type="submit">Buy Now</button>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Available Books</h1>
+<div class="books">
+    {% for book in books %}
+    <div class="book">
+        <h2>{{ book.title }}</h2>
+        {% if book.cover_image %}
+            <img src="{{ book.cover_image.url }}" alt="{{ book.title }}">
+        {% endif %}
+        <p>Price: ${{ book.price }}</p>
+        <a href="{% url 'book_detail' book.slug %}">View Details</a>
+        <form action="{% url 'create_checkout_session' book.id %}" method="POST">
+            {% csrf_token %}
+            <button type="submit">Buy Now</button>
+        </form>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
