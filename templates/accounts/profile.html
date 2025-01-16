@@ -1,11 +1,48 @@
 <!-- templates/accounts/profile.html -->
 
 {% extends 'accounts/base.html' %}
+{% load form_tags %}
 
 {% block accounts %}
-<h1>User Profile</h1>
-<p>Welcome, {{ user.username }}!</p>
-<p>Email: {{ user.email }}</p>
+<div class="max-w-4xl mx-auto">
+    <div class="card bg-base-200 shadow-xl">
+        <div class="card-body">
+            <h1 class="card-title text-3xl mb-6">User Profile</h1>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="space-y-4">
+                    <div class="stats bg-primary text-primary-content">
+                        <div class="stat">
+                            <div class="stat-title">Username</div>
+                            <div class="stat-value text-xl">{{ user.username }}</div>
+                        </div>
+                    </div>
+                    
+                    <div class="stats bg-secondary text-secondary-content">
+                        <div class="stat">
+                            <div class="stat-title">Email</div>
+                            <div class="stat-value text-xl">{{ user.email }}</div>
+                        </div>
+                    </div>
+                </div>
 
-    
+                <div class="space-y-4">
+                    <div class="card bg-base-100">
+                        <div class="card-body">
+                            <h2 class="card-title">Account Actions</h2>
+                            <div class="space-y-2">
+                                <a href="{% url 'password_change' %}" class="btn btn-primary btn-block">
+                                    Change Password
+                                </a>
+                                <a href="{% url 'dashboard' %}" class="btn btn-secondary btn-block">
+                                    My Purchases
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock accounts %}

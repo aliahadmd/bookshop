@@ -1,14 +1,43 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>My Purchased Books</h1>
-<div class="purchases">
-    {% for purchase in purchases %}
-    <div class="purchase">
-        <h2>{{ purchase.book.title }}</h2>
-        <p>Purchased on: {{ purchase.purchased_at }}</p>
-        <a href="{% url 'download_book' purchase.book.id %}">Download PDF</a>
+<div class="container mx-auto px-4 py-8">
+    <h1 class="text-3xl font-bold text-center mb-8">My Purchased Books</h1>
+    
+    <div class="max-w-4xl mx-auto">
+        {% for purchase in purchases %}
+        <div class="card bg-base-200 shadow-xl mb-6">
+            <div class="card-body">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                    <div>
+                        <h2 class="card-title">{{ purchase.book.title }}</h2>
+                        <p class="text-sm opacity-70">
+                            Purchased on: {{ purchase.purchased_at|date:"F j, Y" }}
+                        </p>
+                    </div>
+                    <div class="flex gap-2">
+                        <a href="{% url 'download_book' purchase.book.id %}" 
+                           class="btn btn-primary">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd" />
+                            </svg>
+                            Download PDF
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="text-center py-12">
+            <div class="alert alert-info">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-current shrink-0 w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+                <span>You haven't purchased any books yet.</span>
+            </div>
+            <a href="{% url 'book_list' %}" class="btn btn-primary mt-4">Browse Books</a>
+        </div>
+        {% endfor %}
     </div>
-    {% endfor %}
 </div>
 {% endblock %}

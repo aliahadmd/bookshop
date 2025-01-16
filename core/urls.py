@@ -23,6 +23,7 @@ from django.conf.urls.static import static, serve
 from django.contrib import admin
 from django.urls import path, include
 from django.contrib.auth.views import LoginView, LogoutView
+from django.views.generic import TemplateView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -32,6 +33,7 @@ urlpatterns = [
     path('accounts/logout/', LogoutView.as_view(), name='logout'),
     #media file in production
     path('media/<path:path>', serve, {'document_root': settings.MEDIA_ROOT}),  
+    path('about/', TemplateView.as_view(template_name='about.html'), name='about'),
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

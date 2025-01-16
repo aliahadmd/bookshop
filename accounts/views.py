@@ -10,9 +10,11 @@ from django.utils.encoding import force_bytes
 from django.core.mail import EmailMessage
 from django.contrib.auth.tokens import default_token_generator
 from django.contrib.auth.models import User
+from django.contrib import messages
 
 @login_required
 def profile(request):
+    messages.success(request, "Welcome to your profile!")
     return render(request, 'accounts/profile.html')
 
 
@@ -35,10 +37,13 @@ def signup(request):
         form = SignUpForm(request.POST)
         if form.is_valid():
             user = form.save(commit=False)
-            user.is_active = False  # Disable account until verification
+            user.is_active = False
             user.save()
             send_verification_email(user, request)
+            messages.success(request, 'Please check your email to complete the registration.')
             return render(request, "registration/verification_sent.html")
+        else:
+            messages.error(request, 'Please correct the errors below.')
     else:
         form = SignUpForm()
     return render(request, "registration/signup.html", {"form": form})
@@ -53,6 +58,8 @@ def activate_account(request, uidb64, token):
     if user and default_token_generator.check_token(user, token):
         user.is_active = True
         user.save()
+        messages.success(request, 'Your account has been activated successfully! You can now login.')
         return redirect("login")
     else:
+        messages.error(request, 'The activation link is invalid or has expired.')
         return render(request, "registration/activation_invalid.html")

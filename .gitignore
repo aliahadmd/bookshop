@@ -6,3 +6,5 @@ __pycache__
 *.pyx
 
 .env
+
+node_modules

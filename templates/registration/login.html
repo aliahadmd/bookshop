@@ -1,15 +1,55 @@
 <!-- templates/registration/login.html -->
 
 {% extends 'base.html' %}
+{% load form_tags %}
 
 {% block content %}
-    <h1>Login</h1>
-    <form method="POST">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Save</button>
-    </form>
-    <p>Don't have an account? <a href="{% url 'signup' %}">Sign up</a></p>
-    <p>Forgot your password? <a href="{% url 'password_reset' %}">Reset password</a></p>
-    <a href="{% url 'book_list' %}">Back to Homepage</a>
+<div class="max-w-md mx-auto">
+    <div class="card bg-base-200 shadow-xl">
+        <div class="card-body">
+            <h1 class="card-title text-2xl mb-4">Login</h1>
+            {% if form.non_field_errors %}
+                <div class="alert alert-error shadow-lg mb-4">
+                    <div>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        <span>{{ form.non_field_errors|join:", " }}</span>
+                    </div>
+                </div>
+            {% endif %}
+            <form method="POST" class="space-y-4">
+                {% csrf_token %}
+                {% for field in form %}
+                <div class="form-control">
+                    <label class="label">
+                        <span class="label-text">{{ field.label }}</span>
+                    </label>
+                    {{ field|addclass:"input input-bordered w-full" }}
+                    {% if field.errors %}
+                        {% for error in field.errors %}
+                            <label class="label">
+                                <span class="label-text-alt text-error">{{ error }}</span>
+                            </label>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+                {% endfor %}
+                <div class="form-control mt-6">
+                    <button type="submit" class="btn btn-primary">Login</button>
+                </div>
+            </form>
+            <div class="divider">OR</div>
+            <div class="space-y-2 text-center">
+                <p>Don't have an account? 
+                    <a href="{% url 'signup' %}" class="link link-primary">Sign up</a>
+                </p>
+                <p>Forgot your password? 
+                    <a href="{% url 'password_reset' %}" class="link link-primary">Reset password</a>
+                </p>
+                <a href="{% url 'book_list' %}" class="link link-neutral">Back to Homepage</a>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock content %}
