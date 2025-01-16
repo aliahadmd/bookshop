@@ -39,6 +39,8 @@ environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 
 DEBUG = env('DEBUG')
 
+# DEBUG = False
+
 
 
 # Quick-start development settings - unsuitable for production
@@ -188,27 +190,27 @@ STRIPE_PUBLIC_KEY = env('STRIPE_PUBLIC_KEY')
 STRIPE_SECRET_KEY = env('STRIPE_SECRET_KEY')
 
 
-if not DEBUG:
+# if not DEBUG:
 
-    # CSRF Settings
-    CSRF_TRUSTED_ORIGINS = ['https://*.ahost.marscode.site', 'https://*.aliahad.com']
+#     # CSRF Settings
+#     CSRF_TRUSTED_ORIGINS = ['https://*.ahost.marscode.site', 'https://*.aliahad.com']
 
-    # Security Settings - Simplified for initial deployment
-    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-    USE_X_FORWARDED_HOST = True
-    USE_X_FORWARDED_PORT = True
+#     # Security Settings - Simplified for initial deployment
+#     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+#     USE_X_FORWARDED_HOST = True
+#     USE_X_FORWARDED_PORT = True
 
-    # Session and CSRF Settings
-    SESSION_COOKIE_SECURE = True
-    CSRF_COOKIE_SECURE = True
-
-
-    SECURE_SSL_REDIRECT = True
+#     # Session and CSRF Settings
+#     SESSION_COOKIE_SECURE = True
+#     CSRF_COOKIE_SECURE = True
 
 
-    SECURE_HSTS_SECONDS = 31536000
-    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
-    SECURE_HSTS_PRELOAD = True
+#     SECURE_SSL_REDIRECT = True
+
+
+#     SECURE_HSTS_SECONDS = 31536000
+#     SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+#     SECURE_HSTS_PRELOAD = True
 
 
 
