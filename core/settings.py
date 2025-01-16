@@ -105,20 +105,15 @@ WSGI_APPLICATION = 'core.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
 
-# DATABASES = {
-#     # read os.environ['DATABASE_URL'] and raises
-#     # ImproperlyConfigured exception if not found
-#     #
-#     # The db() method is an alias for db_url().
-#     'default': env.db(),
-# }
+
+DATABASES = {
+    # read os.environ['DATABASE_URL'] and raises
+    # ImproperlyConfigured exception if not found
+    #
+    # The db() method is an alias for db_url().
+    'default': env.db(),
+}
 
 
 # Password validation
@@ -190,27 +185,27 @@ STRIPE_PUBLIC_KEY = env('STRIPE_PUBLIC_KEY')
 STRIPE_SECRET_KEY = env('STRIPE_SECRET_KEY')
 
 
-# if not DEBUG:
+if not DEBUG:
 
-#     # CSRF Settings
-#     CSRF_TRUSTED_ORIGINS = ['https://*.ahost.marscode.site', 'https://*.aliahad.com']
+    # CSRF Settings
+    CSRF_TRUSTED_ORIGINS = ['https://*.ahost.marscode.site', 'https://*.aliahad.com']
 
-#     # Security Settings - Simplified for initial deployment
-#     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-#     USE_X_FORWARDED_HOST = True
-#     USE_X_FORWARDED_PORT = True
+    # Security Settings - Simplified for initial deployment
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+    USE_X_FORWARDED_HOST = True
+    USE_X_FORWARDED_PORT = True
 
-#     # Session and CSRF Settings
-#     SESSION_COOKIE_SECURE = True
-#     CSRF_COOKIE_SECURE = True
-
-
-#     SECURE_SSL_REDIRECT = True
+    # Session and CSRF Settings
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
 
 
-#     SECURE_HSTS_SECONDS = 31536000
-#     SECURE_HSTS_INCLUDE_SUBDOMAINS = True
-#     SECURE_HSTS_PRELOAD = True
+    SECURE_SSL_REDIRECT = True
+
+
+    SECURE_HSTS_SECONDS = 31536000
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+    SECURE_HSTS_PRELOAD = True
 
 
 
